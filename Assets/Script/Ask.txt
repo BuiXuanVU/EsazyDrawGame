@@ -1,0 +1,32 @@
+cho mình hỏi là con này bạn dùng design pattern nào ? tại mình ko vào unity 
+mấy đối tượng như pen có xài singleton thôi còn lại thì ko có
+bật unity ở dưới ko được ạ
+- à ko cần bật unity đâu bạn, mình có chơi game qua rồi ấy cũng biết được cách tiếp cận
+- đánh giá chung là bạn quản lý code flow khá ổn, nhưng theo mình thấy sẽ khó manage
+nếu sau này scale dự án
+- về gameplay thì tương đối chưa chính xác, bạn có thể giới thiệu sơ cho mình về cách thức
+bạn làm gameplay ko?
++ Về gameplay thì cũng nói thật là làm theo nhìn nhận cá nhân
++ khi mà ng chơi nhấn vào màn hình thì vẽ đường line theo các điểm có trước sau khi xong thì ẩn đường line vẽ rồi hiện hình thật cái này là làm theo game mẫu.
++ còn phần thấy khó làm cho giống nhất thì là phần màu dùng sprite mask để hiện từng ô màu thôi cứ mình cũng chưa nghĩ ra cách nào..
+OK bạn thật ra làm vậy là khá ổn r, cho mình hỏi bạn fresher hay junior theo đánh giá cá nhân nha
+Mình vừa ra trường mới cở fresher là hết cốt thôi junior còn xa mà
+à tại bên sếp mình ko rõ lắm, mình cũng đánh giá cỡ fresher
+mà mình có intern chưa bạn nhỉ ?
++ Trước mình có intern cho một công ty nhưng mà làm hơi khác bạn
++ Trong cty mọi người làm 1 dự án game riêng rồi đưa cho sếp đánh giá cái nào đc thì sếp scale ra chứ ko đc làm nhóm á cứ làm lẻ lẻ ...
+- à thế là ở cty mình làm cá nhân thôi, vậy thì khó học hỏi hơn, nhưng nhìn dự án này thấy bạn khá là tỉ mỉ, nhưng chưa áp dụng được nhiều phương thức và design khác nhau
+- mình gợi ý sau nếu bắt đầu 1 dự án, bạn hãy hình dung trước cách thức bạn sẽ làm, về phần này thì bạn làm khá tốt, nhưng chưa đủ, cách bạn làm nối giữa các transform sẽ trông không mượt ấy, mình gợi ý bạn tìm hiểu qua Path Creator
+- phần tô màu mình gợi ý bạn tìm hiểu qua particle system (Spreading) và Line Renderer
+- flow thì mình gợi ý bạn tìm hiểu lập trình bất đồng bộ, tool mình dùng là UniTask
+- nhìn chung mình thấy demo chưa đi đúng con game ấy, còn khả năng thì mình thấy ok, có tỉ mỉ nhưng cần bài bản hơn
++ Mình cảm ơn phần góp ý để mình về nghiên cứu lại
++ Chỗ phần vẽ ấy nó ko mượt 1 phần là do cây bút nó chạy bị lỗi khi từ máy tính qua đt mình chưa sửa đc ..
+à chỗ cây bút là bạn đưa cây bút vào vị trí vẽ đk
+con cũ mình chưa xem phần cây bút, nhưng nó sẽ có 2 phase, 1 vẽ 1 tô màu, lúc tô màu thì nó sẽ theo cái pointer touch của mình, lúc vẽ thì như của bạn ấy
+ko sao cứ xem qua Path Creator và Line Renderer nhé, vẽ thì particle system, cũng ko quá khó đâu.
+còn flow thì mình ko đặt nặng ở fresher lắm nên ko sao
++ Vậy nếu mà không còn gì thì bạn cho mình cảm ơn!
+à đúng r bạn có câu hỏi gì ko? 
++ NHững câu hỏi về dự án mình chưa biết đã tiện hỏi ở trên rồi bạn.
+ok bạn vậy chúc bạn may mắn nha, cám ơn bạn nhé 
