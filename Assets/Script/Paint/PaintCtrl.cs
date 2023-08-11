@@ -6,7 +6,7 @@ public class PaintCtrl : ComponentBehaviuor
 {
     [SerializeField] public List<Transform> paintPoint;
     private float lastTime;
-    int i = 0;
+    [SerializeField] private int i = 0;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -29,20 +29,21 @@ public class PaintCtrl : ComponentBehaviuor
                 PenCtrl.Instance.PenDraw.GetStartPos(paintPoint[0]);
             if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetMouseButton(0))
             {
-             
-                if (Time.time - lastTime <= 0.05f)
-                    return;
-                lastTime = Time.time;
                 Painting();
             }
         }
     }
     private void Painting()
     {
+        if (!PenCtrl.Instance.PenDraw.GetCompletePaint())
+        {
+            return;
+        }    
         if(i<paintPoint.Count)
         {
-            paintPoint[i].gameObject.SetActive(false);
-            PenCtrl.Instance.PenDraw.GetPoint(paintPoint[i]);
+            if(i+1< paintPoint.Count)
+                PenCtrl.Instance.PenDraw.GetMaskPos(paintPoint[i+1]);
+            paintPoint[i].gameObject.SetActive(true);
             i++;
         }
         else

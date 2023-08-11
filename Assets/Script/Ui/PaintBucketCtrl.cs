@@ -6,8 +6,7 @@ using UnityEngine;
 public class PaintBucketCtrl : ComponentBehaviuor
 {
     [SerializeField] private List<GameObject> buckets;
-    [SerializeField] private ColorsList listColor;
-    [SerializeField] private int colorCount = 0;
+    [SerializeField] private List<Color>  listColor;
     public bool isSelectedColor = false;
     protected override void LoadComponents()
     {
@@ -33,13 +32,9 @@ public class PaintBucketCtrl : ComponentBehaviuor
 
     public void ChangePaintBucket()
     {
-        if (colorCount < listColor.colorslist.Count)
+        for (int i = 0; i < 4; i++)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                buckets[i].transform.GetComponentInChildren<SpriteRenderer>().color = listColor.colorslist[colorCount].colors[i];
-            }
-            colorCount++;
+            buckets[i].transform.GetComponentInChildren<SpriteRenderer>().color = ImageCtrl.Instance.ColorPaintManager.colors[i];
         }
     }
 }

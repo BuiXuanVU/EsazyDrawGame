@@ -6,7 +6,6 @@ public class DrawLine : ComponentBehaviuor
 {
     [SerializeField] private LineRenderer line;
     [SerializeField] public bool isDraw = false;
-    private float counter;
     private float dist ;
     public int number = 0;
     public Transform origin;
@@ -42,8 +41,7 @@ public class DrawLine : ComponentBehaviuor
     private void GetPoint()
     {
         if(number == 0)
-        {
-            origin = AutoDraw.instance.Point.startPoint;
+        {   origin = AutoDraw.instance.Point.startPoint;
             destination = AutoDraw.instance.Point.points[number];
             AutoDraw.instance.Point.startPoint.gameObject.SetActive(false);
             AutoDraw.instance.Point.endPoint.gameObject.SetActive(true);
@@ -69,7 +67,8 @@ public class DrawLine : ComponentBehaviuor
         }
         line.SetPosition(number, origin.position);
         line.SetPosition(number+1, origin.position);
-        dist = Vector3.Distance(origin.position, destination.position);
+        dist = Vector2.Distance(origin.position, destination.position);
+        PenCtrl.Instance.PenDraw.GetPoint(destination, dist);
         isDraw = true;
     }  
     private void EndDraw()
@@ -77,24 +76,18 @@ public class DrawLine : ComponentBehaviuor
         destination = AutoDraw.instance.Point.endPoint;
         AutoDraw.instance.HideDrawPoint();
     }
+
     private void Draw()
     {
-        PenCtrl.Instance.PenDraw.GetPoint(destination);
-        if (counter < dist)
-        {
-            counter += 0.1f / lineDrawSpeed;
-            float x = Mathf.Lerp(counter, dist, 0);
-            Vector3 pointA = origin.localPosition;
-            Vector3 pointB = destination.localPosition;
-            Vector3 pointLine = x * Vector3.Normalize(pointB - pointA) + pointA;
-            line.SetPosition(number+1, pointLine);
-        }
+#if UNITY_ANDROID
+        if (dist > 0.2f)
+            lineDrawSpeed = 2f;
         else
-        {
-            counter = 0f;
+            lineDrawSpeed = 1f;
+#endif
+            line.SetPosition(number + 1, destination.position);
             isDraw = false;
             number++;
-        }    
     }    
     public void HideDrawLine()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : ComponentBehaviuor
@@ -19,8 +20,16 @@ public class UIManager : ComponentBehaviuor
     {
         get { return paintBucketCtrl; }
     }
+    [SerializeField] private RandomUI randomUI;
+    public RandomUI RandomUI
+    {
+        get { return randomUI; }
+    }
 
     [SerializeField] private GameObject complete;
+    [SerializeField] private GameObject basicUI;
+    [SerializeField] private TextMeshProUGUI Level;
+    private int i = 1;
     protected override void Awake()
     {
         base.Awake();
@@ -31,6 +40,7 @@ public class UIManager : ComponentBehaviuor
         base.LoadComponents();
         loadChangeDrawUi();
         loadPaintBucketCtrl();
+        loadRandomUI();
     }
     private void loadChangeDrawUi()
     {
@@ -42,8 +52,14 @@ public class UIManager : ComponentBehaviuor
         if(paintBucketCtrl != null) return;
         paintBucketCtrl = transform.GetComponentInChildren<PaintBucketCtrl>();
     }
+    private void loadRandomUI()
+    {
+        if (randomUI != null) return;
+        randomUI = transform.GetComponent<RandomUI>();
+    }
     public void ActiveImageDialog()
     {
+        PenCtrl.Instance.PenDraw.SetPickUp();
         changeDrawUI.gameObject.SetActive(true);
     }
     public void StartPainting()
@@ -52,6 +68,11 @@ public class UIManager : ComponentBehaviuor
     }
     public void StartComplete()
     {
+        basicUI.SetActive(false);
         complete.SetActive(true);
+    }
+    public void NumberLevel()
+    {
+        Level.text = "Level " + i.ToString();
     }
 }

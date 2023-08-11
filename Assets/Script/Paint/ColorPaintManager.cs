@@ -7,6 +7,7 @@ public class ColorPaintManager : ComponentBehaviuor
     [SerializeField] public SpriteRenderer spriteColor;
     [SerializeField] public List<GameObject> spriteColors;
     [SerializeField] private NoticeColoringArea noticeColoringArea;
+    [SerializeField] public List<Color> colors;
     private int colorFrameNumber=0;
     private int frameCount = 0;
     protected override void LoadComponents()
@@ -58,6 +59,10 @@ public class ColorPaintManager : ComponentBehaviuor
         spriteColors[frameCount+1].SetActive(true);
         spriteColor = spriteColors[frameCount].GetComponent<SpriteRenderer>();
         noticeColoringArea.StartNotice(spriteColors[frameCount+1]);
+    }
+    public void SwapColor()
+    {
+        spriteColors[frameCount + 1].GetComponent<SpriteRenderer>().color = spriteColor.color;
     }
     public void ColorPaint(Color32 color)
     {

@@ -17,7 +17,6 @@ public class ColorPaint : ComponentBehaviuor
     }
     public void ChangeColor()
     {
-        if(UIManager.Instance. PaintBucketCtrl.isSelectedColor == true) return;
         ImageCtrl.Instance.ColorPaintManager.ColorPaint(paintColor.color);
         PenCtrl.Instance.PenColorCtrl.GetPenColor(paintColor.color);
         UIManager.Instance.PaintBucketCtrl.HideBuckets();

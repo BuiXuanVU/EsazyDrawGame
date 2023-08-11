@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ChangeDrawUI : ComponentBehaviuor
+public class ChangeDrawUI : CongratsTextImageCtrl
 {
     public bool isPainting;
     public void NextImage()
     {
+        
         if (!isPainting)
         {
             if (AutoDraw.instance.FrameCountCompare())
@@ -19,6 +21,7 @@ public class ChangeDrawUI : ComponentBehaviuor
         }
         else
         {
+            ImageCtrl.Instance.ColorPaintManager.SwapColor();
             if (ImageCtrl.Instance.ColorPaintManager.FrameCountCompare())
             {
                 PaintingTransition();
@@ -48,7 +51,6 @@ public class ChangeDrawUI : ComponentBehaviuor
     {
         ImageCtrl.Instance.ColorPaintManager.ChangeColorFrame();
         AutoPainting.Instance.ChangePaintCtrl();
-        UIManager.Instance.PaintBucketCtrl.ChangePaintBucket();
         UIManager.Instance.PaintBucketCtrl.ActiveBuckets();
     }
 }

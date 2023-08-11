@@ -6,7 +6,7 @@ public class ComponentBehaviuor : MonoBehaviour
 {
     protected virtual void Start()
     {
-
+        Application.targetFrameRate = 60;
     }
     protected virtual void Reset()
     {

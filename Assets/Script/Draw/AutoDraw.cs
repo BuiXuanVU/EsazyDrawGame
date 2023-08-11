@@ -37,6 +37,7 @@ public class AutoDraw : ComponentBehaviuor
 
     public void HideDrawPoint()
     {
+        PenCtrl.Instance.PenDraw.SetPickUp();
         UIManager.Instance.ActiveImageDialog();
         transform.GetChild(paintingNumber).gameObject.SetActive(false);
         isCompleteDraw = true;

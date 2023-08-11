@@ -16,13 +16,11 @@ public class ImageCtrl : ComponentBehaviuor
     {
         get { return colorPaintManager; }
     }
-
     protected override void Awake()
     {
         base.Awake();
         instance = this;
     }
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
