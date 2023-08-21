@@ -2,28 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RandomUI : ComponentBehaviuor
 {
     [SerializeField] private Sprite[] textUI;
+    [SerializeField] private Sprite[] emojiUI;
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadSprite();
+        LoadTextUISprite();
+        LoadEmojiUISprite();
     }
-    private void LoadSprite()
+    private void LoadTextUISprite()
     {
         if (textUI.Length > 0) return;
         var text = Resources.LoadAll("CongratUI/Text/", typeof(Sprite)).Cast<Sprite>().ToArray();
         textUI = text.ToArray();
     }
+    private void LoadEmojiUISprite()
+    {
+        if (emojiUI.Length > 0) return;
+        var icon = Resources.LoadAll("CongratUI/Emoji/", typeof(Sprite)).Cast<Sprite>().ToArray();
+        emojiUI = icon.ToArray();
+    }
     public Sprite GetCongratText()
     {
-        return textUI[GetRandom()];
+        return textUI[GetRandom(textUI.Length)];
     }
-    private int GetRandom()
+    public Sprite GetCongratEmojit()
     {
-        return Random.Range(0, textUI.Length-1);
+        return emojiUI[GetRandom(emojiUI.Length)];
+    }
+    private int GetRandom(int lenght)
+    {
+        return Random.Range(0, lenght);
     }
 }

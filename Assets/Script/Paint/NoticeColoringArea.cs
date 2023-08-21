@@ -51,7 +51,6 @@ public class NoticeColoringArea : MonoBehaviour
         isUp = true;
         isDirectionUp = true;
     }
-
     public void EndNotice()
     {
         a = 0;

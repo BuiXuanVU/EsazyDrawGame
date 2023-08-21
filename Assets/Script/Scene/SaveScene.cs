@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveScene : MonoBehaviour
 {
-    [SerializeField] private int level = 1;
-    [SerializeField] private string keyName;
-    private int GetLevel()
+    private int level = 1;
+    [SerializeField] private string keyName = "Art 1";
+    private void Reset()
+    { //phuc hoi level 1
+        PlayerPrefs.SetInt(keyName, 1);
+        //PlayerPrefs.DeleteAll();
+    }
+    public int GetLevel()
     {
         return PlayerPrefs.GetInt(keyName);
-    }    
-    private void SaveLevel()
+    }
+    public void SaveLevel()
     {
         PlayerPrefs.SetInt(keyName, level); 
-    }    
-    private void NextLeve()
+    }
+    public void NextLevel()
     {
-        level++;
+        level = GetLevel()+1;
         SaveLevel();
     }    
 }

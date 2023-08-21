@@ -10,7 +10,6 @@ public class DrawLine : ComponentBehaviuor
     public int number = 0;
     public Transform origin;
     public Transform destination;
-    public float lineDrawSpeed = 6f;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -26,7 +25,7 @@ public class DrawLine : ComponentBehaviuor
     {
         if (!AutoDraw.instance.isCompleteDraw)
         {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetMouseButton(0))
+            if (InputManager.Instance.GetTouch())
             {
                 if (!isDraw)
                 {
@@ -73,21 +72,16 @@ public class DrawLine : ComponentBehaviuor
     }  
     private void EndDraw()
     {
+        AudioCtrl.Instance.ClearSound();
         destination = AutoDraw.instance.Point.endPoint;
         AutoDraw.instance.HideDrawPoint();
     }
 
     private void Draw()
     {
-#if UNITY_ANDROID
-        if (dist > 0.2f)
-            lineDrawSpeed = 2f;
-        else
-            lineDrawSpeed = 1f;
-#endif
-            line.SetPosition(number + 1, destination.position);
-            isDraw = false;
-            number++;
+        line.SetPosition(number + 1, destination.position);
+        isDraw = false;
+        number++;
     }    
     public void HideDrawLine()
     {

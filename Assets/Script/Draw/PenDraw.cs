@@ -24,9 +24,9 @@ public class PenDraw : ComponentBehaviuor
         {
             MoveToStartPos();
         }
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetMouseButton(0) )
+        if (InputManager.Instance.GetTouch())
         {
-            if(isStart == true) 
+            if (isStart == true) 
                 TeleToStartPos();
             MoveToPoint();
             MoveToMask();
@@ -34,29 +34,33 @@ public class PenDraw : ComponentBehaviuor
         }
         if(Input.GetMouseButtonUp(0))
         {
+            AudioCtrl.Instance.ClearSound();
             PenPickUp();
         }
     }
     public void GetStartPos(Transform startPosition)
     {
         startPos = startPosition;
+        if (Vector2.Distance(transform.position, startPos.position) > 2)
+            speed = 20;
         isStart = true;
         isHide = false;
     }
 
     private void MoveToStartPos()
     {
-        if (Vector2.Distance(transform.position, startPos.position) < 0.5)
+        if (Vector2.Distance(transform.position, startPos.position) < 0.01)
         {
             TeleToStartPos();
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, startPos.position, 40 * Time.deltaTime);;
+            transform.position = Vector3.MoveTowards(transform.position, startPos.position, speed * Time.deltaTime);
         }
     }
     private void TeleToStartPos()
     {
+        speed = 10;
         transform.position = startPos.position;
         isStart = false;
     }
@@ -75,6 +79,7 @@ public class PenDraw : ComponentBehaviuor
     {
         if (isMoving)
         {
+            AudioCtrl.Instance.DrawSound();
             transform.position = Vector2.SmoothDamp(transform.position, nextPos.position, ref velocity, X*0.2f, speed);
             isPickup = true;
         }
@@ -83,8 +88,9 @@ public class PenDraw : ComponentBehaviuor
     {
         if (isPainting)
         {
-            if (Vector2.Distance(transform.position, nextPos.position) > 0.05f)
+            if (Vector2.Distance(transform.position, nextPos.position) > 0.01f)
             {
+                AudioCtrl.Instance.DrawSound();
                 transform.position = Vector2.MoveTowards(transform.position, nextPos.position, speed * Time.deltaTime);
                 isComletePaint = false;
                 isPickup = true;

@@ -21,7 +21,6 @@ public class DrawPointCtrl : ComponentBehaviuor
         Transform pointHolder = transform.GetChild(1);
         for (int i = 0; i < pointHolder.childCount; i++)
             points.Add(pointHolder.GetChild(i));
-
     }
     private void LoadStartPoint()
     {

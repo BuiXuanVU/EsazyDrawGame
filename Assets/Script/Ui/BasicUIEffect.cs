@@ -9,12 +9,17 @@ public class BasicUIEffect : UIEffect
     [SerializeField] private TextMeshProUGUI tap;
     [SerializeField] private TextMeshProUGUI level;
     [SerializeField] private Image template;
+    [SerializeField] private Button music;
+    [SerializeField] private Sprite musicON;
+    [SerializeField] private Sprite musicOFF;
     private bool isTap;
+    private bool isMute = true;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadTap();
         LoadTemplate();
+        LoadLevelText();
     }
     private void LoadTap()
     {
@@ -26,11 +31,19 @@ public class BasicUIEffect : UIEffect
         if (template != null) return;
         template = transform.GetChild(transform.childCount - 2).GetChild(0).GetComponent<Image>();
     }
+    private void LoadLevelText()
+    {
+        if (level != null) return;
+        level = transform.GetComponentInChildren<TextMeshProUGUI>();
+    }
     protected override void Start()
     {
         base.Start();
-        ScaleImage(tap.transform);
-        GetTemplate();
+        ScaleImage(tap.rectTransform, 0.2f);
+    }
+    public void GetCurrentLevel(int currenlevel)
+    {
+        level.text = "Level " + currenlevel.ToString();
     }
     private void Update()
     {
@@ -40,8 +53,23 @@ public class BasicUIEffect : UIEffect
             tap.gameObject.SetActive(false);
         }
     }
-    private void GetTemplate()
+    public void GetTemplate(Sprite templeteSprite)
     {
-        template.sprite = ImageCtrl.Instance.FrameCtrl.GetComponentInChildren<SpriteRenderer>().sprite;
+        template.sprite = templeteSprite;
+    }    
+    public void ButtonMuteClick()
+    {
+        if(isMute)
+        {
+            AudioCtrl.Instance.MuteAudio(isMute);
+            music.image.sprite = musicOFF;
+            isMute = false;
+        }
+        else
+        {
+            AudioCtrl.Instance.MuteAudio(isMute);
+            music.image.sprite = musicON;
+            isMute = true;
+        }
     }    
 }

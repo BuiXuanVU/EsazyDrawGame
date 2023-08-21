@@ -12,14 +12,15 @@ public class ZoomCamera : ComponentBehaviuor
     }
 
     [SerializeField] private Camera _camera;
+    private int speed = 6;
     public bool isZoom;
+    public bool isReturn;
     public Vector3 frameTransform;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadCamera();
     }
-
     private void LoadCamera()
     {
         if(_camera!=null) return;
@@ -35,23 +36,31 @@ public class ZoomCamera : ComponentBehaviuor
     {
         if (isZoom)
         {
-            transform.position = Vector3.MoveTowards(transform.position, frameTransform, 10 * Time.deltaTime);
-            if (Vector2.Distance(transform.position, frameTransform) < 0.1f)
+            transform.position = Vector3.MoveTowards(transform.position, frameTransform, speed * Time.deltaTime);
+            if(_camera.orthographicSize > 6 && !isReturn)
+                _camera.orthographicSize -= 0.1f;
+            if (Vector2.Distance(transform.position, frameTransform) < 0.05f)
             {
                 transform.position = frameTransform;
                 isZoom = false;
+            }
+            if (isReturn && _camera.orthographicSize < 10)
+            {
+                _camera.orthographicSize += 0.1f;
             }
         }
     }
     public void Zoom(Transform framePosition)
     {
-        _camera.orthographicSize = 6;
         frameTransform = framePosition.position;
+        speed = 6;
         isZoom = true;
     }
     public void ReturnCamPos()
     {
-        _camera.orthographicSize = 10;
-        transform.position = new Vector3(0,0,0);
+        speed = 8;
+        isReturn = true;
+        isZoom = true;
+        frameTransform = Vector3.zero;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PaintCtrl : ComponentBehaviuor
 {
@@ -27,7 +28,7 @@ public class PaintCtrl : ComponentBehaviuor
         {
             if(i==0)
                 PenCtrl.Instance.PenDraw.GetStartPos(paintPoint[0]);
-            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetMouseButton(0))
+            if(InputManager.Instance.GetTouch())
             {
                 Painting();
             }
@@ -48,6 +49,7 @@ public class PaintCtrl : ComponentBehaviuor
         }
         else
         {
+            AudioCtrl.Instance.ClearSound();
             UIManager.Instance.ActiveImageDialog();
             PenCtrl.Instance.PenDraw.HidePen();
         }
