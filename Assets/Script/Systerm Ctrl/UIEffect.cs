@@ -21,9 +21,7 @@ public abstract class UIEffect : ComponentBehaviuor
     protected void MoveToOriginalLocation(Transform originalLocation, float xPos,float yPos)
     {
         Vector2 saveLocation = originalLocation.position;
-        Debug.Log(saveLocation);
         originalLocation.position = new Vector2(saveLocation.x + xPos, saveLocation.y + yPos);
-        Debug.Log(originalLocation.position);
         originalLocation.DOMove(saveLocation, 0.5f);
     }
 }

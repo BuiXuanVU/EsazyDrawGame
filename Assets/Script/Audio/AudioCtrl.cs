@@ -35,7 +35,7 @@ public class AudioCtrl : ComponentBehaviuor
     private void LoadDrawSource()
     {
         if (drawSource != null) return;
-        audioSource = GetComponent<AudioSource>();
+        drawSource = GetComponent<AudioSource>();
     }
     public void PlaySoundtrack()
     {

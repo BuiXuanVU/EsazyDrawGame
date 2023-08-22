@@ -9,6 +9,7 @@ public class SceneCrtl : ComponentBehaviuor
     [SerializeField] private SaveScene saveScene;
     public SaveScene SaveScene { get { return saveScene; } }
     [SerializeField] private LevelScriptTable levelSpawner;
+    int count = 0;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -23,22 +24,30 @@ public class SceneCrtl : ComponentBehaviuor
     protected override void Start()
     {
         base.Start();
-        loadLevel(saveScene.GetLevel());
+        loadLevel();
     }
     private void LoadLevelObject()
     {
         if(levelSpawner != null) return;
         levelSpawner = Resources.Load<LevelScriptTable>("Level/Art/"+SceneManager.GetActiveScene().name);
     }
-    private void loadLevel(int i)
+    private void loadLevel()
     {
-        if (i == 0 ||i > levelSpawner.prefabLevel.Count)
+        count = saveScene.GetLevel();
+        if (count >= levelSpawner.prefabLevel.Count)
         {
-            i = 1;
-            SaveScene.SaveLevel();
+            int temp = Random.Range(0, levelSpawner.prefabLevel.Count);
+            if (temp == saveScene.GetArtLevel())
+                loadLevel();
+            else
+            {
+                count = temp;
+            }
         }
-        Instantiate(levelSpawner.prefabLevel[1-1]);
-        UIManager.Instance.BasicUIEffect.GetCurrentLevel(i);
+        saveScene.SaveArtLevel(count);
+        count = saveScene.GetArtLevel();
+        Instantiate(levelSpawner.prefabLevel[count]);
+        UIManager.Instance.BasicUIEffect.GetCurrentLevel(saveScene.GetLevel()+1);
     }
     public void Replay()
     {
@@ -55,15 +64,15 @@ public class SceneCrtl : ComponentBehaviuor
     }
     public void NextLevel()
     {
-        AdsManager.Instance.ShowVideoReward((success =>
+        /*AdsManager.Instance.ShowVideoReward((success =>
         {
             if (success)
             {
-                AudioCtrl.Instance.ClickButtonSound();
-                saveScene.NextLevel();
-                loadLevel(saveScene.GetLevel());
-                Replay();
+                
             }
-        })); 
+        }));*/
+        AudioCtrl.Instance.ClickButtonSound();
+        saveScene.NextLevel();
+        Replay();
     }
 }
