@@ -50,6 +50,13 @@ public class ZoomCamera : ComponentBehaviuor
             }
         }
     }
+    public void GetScaleZoom(float width)
+    {
+        if (width > 5)
+            isReturn = true;
+        else
+            isReturn = false;
+    }
     public void Zoom(Transform framePosition)
     {
         frameTransform = framePosition.position;

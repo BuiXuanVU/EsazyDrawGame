@@ -64,13 +64,20 @@ public class FrameCtrl : ComponentBehaviuor
         frameIndex++;
         frame = transform.GetChild(frameIndex).gameObject;
         if(frameIndex+1 < frameNumber)
-        ZoomCamera.Instance.Zoom(transform.GetChild(frameIndex+1).transform);
+        {
+            ZoomCamera.Instance.GetScaleZoom(GetWidth(frameIndex + 1));
+            ZoomCamera.Instance.Zoom(transform.GetChild(frameIndex + 1).transform);
+        }
         frame.SetActive(true);
         if(SpecialConditionsFrame())
         {
             subframe = transform.GetChild(frameIndex+1).gameObject;
             subframe.SetActive(true);
         }
+    }
+    private float GetWidth(int index)
+    {
+        return transform.GetChild(index).GetComponent<SpriteRenderer>().bounds.size.x;
     }
     private bool SpecialConditionsFrame()
     {
