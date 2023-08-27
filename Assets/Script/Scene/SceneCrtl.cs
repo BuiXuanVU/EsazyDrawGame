@@ -8,13 +8,13 @@ public class SceneCrtl : ComponentBehaviuor
     public static SceneCrtl Instance { get { return instance; } }
     [SerializeField] private SaveScene saveScene;
     public SaveScene SaveScene { get { return saveScene; } }
-    [SerializeField] private LevelScriptTable levelSpawner;
-    int count = 0;
+    [SerializeField] private List<LevelScriptTable> levelSpawner;
+    int level;
+    int count;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadSaveScene();
-        LoadLevelObject();
     }
     private void LoadSaveScene()
     {
@@ -24,18 +24,15 @@ public class SceneCrtl : ComponentBehaviuor
     protected override void Start()
     {
         base.Start();
+        level = LevelCtrl.Instance.level-1;
         loadLevel();
-    }
-    private void LoadLevelObject()
-    {
-        if(levelSpawner != null) return;
-        levelSpawner = Resources.Load<LevelScriptTable>("Level/Art/"+SceneManager.GetActiveScene().name);
+
     }
     private void loadLevel()
     {
-        count = saveScene.GetArtLevel();
-        Instantiate(levelSpawner.prefabLevel[count]);
-        UIManager.Instance.BasicUIEffect.GetCurrentLevel(saveScene.GetLevel()+1);
+        count = saveScene.GetArtLevel(levelSpawner[level].name);
+        Instantiate(levelSpawner[level].prefabLevel[count]);
+        UIManager.Instance.BasicUIEffect.GetCurrentLevel(saveScene.GetLevel(levelSpawner[level].name) +1);
     }
     public void Replay()
     {
@@ -52,18 +49,25 @@ public class SceneCrtl : ComponentBehaviuor
     }
     public void NextLevel()
     {
-        /*AdsManager.Instance.ShowVideoReward((success =>
+        AdsManager.Instance.ShowVideoReward((success =>
         {
             if (success)
             {
-                
+                ChangeLevel();
             }
-        }));*/
+        }));
+        
+    }
+    private void ChangeLevel()
+    {
+        Debug.Log(saveScene.GetLevel(levelSpawner[level].name)+"A");
+        Debug.Log(levelSpawner[level].prefabLevel.Count + "B");
+        Debug.Log(saveScene.GetArtLevel(levelSpawner[level].name)+"C");
         AudioCtrl.Instance.ClickButtonSound();
-        if (saveScene.GetLevel() >= levelSpawner.prefabLevel.Count-1)
+        if (saveScene.GetLevel(levelSpawner[level].name) >= levelSpawner[level].prefabLevel.Count - 1)
         {
-            int temp = Random.Range(0, levelSpawner.prefabLevel.Count);
-            if (temp == saveScene.GetArtLevel())
+            int temp = Random.Range(0, levelSpawner[level].prefabLevel.Count);
+            if (temp == saveScene.GetArtLevel(levelSpawner[level].name))
             {
                 NextLevel();
                 return;
@@ -76,9 +80,10 @@ public class SceneCrtl : ComponentBehaviuor
         else
         {
             count++;
+            Debug.Log("++");
         }
-        saveScene.SaveArtLevel(count);
-        saveScene.NextLevel();
+        saveScene.SaveArtLevel(levelSpawner[level].name,count);
+        saveScene.SaveLevel(levelSpawner[level].name);
         Replay();
     }
 }

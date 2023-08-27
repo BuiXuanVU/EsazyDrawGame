@@ -45,7 +45,6 @@ public class DrawLine : ComponentBehaviuor
             AutoDraw.instance.Point.startPoint.gameObject.SetActive(false);
             AutoDraw.instance.Point.endPoint.gameObject.SetActive(true);
             line.SetPosition(0, origin.position);
-            
         }
         else
         {

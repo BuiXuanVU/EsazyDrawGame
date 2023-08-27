@@ -3517,8 +3517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027d397849b24394b97f3103ade78d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyName: Art 1
-  ArtLevel: ArtLevel 1
 --- !u!114 &1246437779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3532,7 +3530,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveScene: {fileID: 1246437778}
-  levelSpawner: {fileID: 11400000, guid: aa1f262f4b2aa9f4b9179cb21fef692e, type: 2}
+  levelSpawner:
+  - {fileID: 11400000, guid: aa1f262f4b2aa9f4b9179cb21fef692e, type: 2}
+  - {fileID: 11400000, guid: 49cbf3bb3cd53d6499e45074a48b217d, type: 2}
+  - {fileID: 11400000, guid: d4f4f5bc35ffd66408a21ca752724972, type: 2}
+  - {fileID: 11400000, guid: d4223cfb7b8f89b4db8580a09db55526, type: 2}
 --- !u!4 &1246437780
 Transform:
   m_ObjectHideFlags: 0

@@ -6,33 +6,27 @@ using UnityEngine.SceneManagement;
 public class SaveScene : MonoBehaviour
 {
     private int level = 1;
-    [SerializeField] private string keyName = "Art 1";
-    [SerializeField] private string ArtLevel = "ArtLevel 1";
     private void Reset()
     { //phuc hoi level 1
-        PlayerPrefs.SetInt(keyName, 0);
-        PlayerPrefs.SetInt(ArtLevel, 0);
-        //PlayerPrefs.DeleteAll();
+        //PlayerPrefs.SetInt(keyName, 0);
+        //PlayerPrefs.SetInt(ArtLevel, 0);
+        PlayerPrefs.DeleteAll();
     }
-    public int GetLevel()
+    public int GetLevel(string keyName)
     {
-        return PlayerPrefs.GetInt(keyName);
+        return PlayerPrefs.GetInt(keyName+"lv");
     }
-    public int GetArtLevel()
+    public int GetArtLevel(string keyName)
     {
-        return PlayerPrefs.GetInt(ArtLevel);
+        return PlayerPrefs.GetInt(keyName+"art");
     }
-    public void SaveLevel()
+    public void SaveLevel(string keyName)
     {
-        PlayerPrefs.SetInt(keyName, level); 
+        int level = GetLevel(keyName + "lv") + 1;
+        PlayerPrefs.SetInt(keyName + "lv", level); 
     }
-    public void SaveArtLevel(int arlLv)
+    public void SaveArtLevel(string keyName,int artLv)
     {
-        PlayerPrefs.SetInt(ArtLevel, arlLv);
+        PlayerPrefs.SetInt(keyName + "art", artLv);
     }
-    public void NextLevel()
-    {
-        level = GetLevel()+1;
-        SaveLevel();
-    }    
 }

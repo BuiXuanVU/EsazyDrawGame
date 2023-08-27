@@ -8,7 +8,7 @@ public class ColorPaintManager : ComponentBehaviuor
     [SerializeField] public List<GameObject> spriteColors;
     [SerializeField] private NoticeColoringArea noticeColoringArea;
     [SerializeField] public List<Color> colors;
-    private int colorFrameNumber=0;
+    private int colorFrameNumber;
     private int frameCount = 0;
     protected override void LoadComponents()
     {
@@ -19,7 +19,7 @@ public class ColorPaintManager : ComponentBehaviuor
     }
     private void LoadColorFrameNumber()
     {
-        if(colorFrameNumber != 0) return;
+        if(colorFrameNumber == transform.childCount) return;
         colorFrameNumber = transform.childCount;
     }
 

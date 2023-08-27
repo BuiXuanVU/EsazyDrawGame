@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneMenuSelect : MonoBehaviour
 {
-    public static int selectedLevel;
     public int level;
     private void Start()
     {
@@ -13,7 +12,7 @@ public class SceneMenuSelect : MonoBehaviour
     }
     public void SelectLevel()
     {
-        selectedLevel = level;
-        SceneManager.LoadScene("Art " + selectedLevel);
+        LevelCtrl.Instance.GetLevel(level);
+        SceneManager.LoadScene("Art " + 1);
     }
 }
