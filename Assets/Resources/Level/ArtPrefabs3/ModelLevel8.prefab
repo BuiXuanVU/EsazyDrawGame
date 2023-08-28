@@ -17294,7 +17294,7 @@ Transform:
   - {fileID: 6789955938088847218}
   - {fileID: 1208019713140478230}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3849218149067044122
 GameObject:
@@ -25890,7 +25890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frame: {fileID: 4124313752212617058}
-  frameColor: {r: 0, g: 0, b: 0, a: 0}
+  frameColor: {r: 1, g: 1, b: 1, a: 0}
   frameNumber: 5
   frameIndex: 0
 --- !u!1 &5934035349734737770

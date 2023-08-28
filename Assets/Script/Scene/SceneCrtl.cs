@@ -26,7 +26,6 @@ public class SceneCrtl : ComponentBehaviuor
         base.Start();
         level = LevelCtrl.Instance.level-1;
         loadLevel();
-
     }
     private void loadLevel()
     {
@@ -60,9 +59,6 @@ public class SceneCrtl : ComponentBehaviuor
     }
     private void ChangeLevel()
     {
-        Debug.Log(saveScene.GetLevel(levelSpawner[level].name)+"A");
-        Debug.Log(levelSpawner[level].prefabLevel.Count + "B");
-        Debug.Log(saveScene.GetArtLevel(levelSpawner[level].name)+"C");
         AudioCtrl.Instance.ClickButtonSound();
         if (saveScene.GetLevel(levelSpawner[level].name) >= levelSpawner[level].prefabLevel.Count - 1)
         {
@@ -80,7 +76,6 @@ public class SceneCrtl : ComponentBehaviuor
         else
         {
             count++;
-            Debug.Log("++");
         }
         saveScene.SaveArtLevel(levelSpawner[level].name,count);
         saveScene.SaveLevel(levelSpawner[level].name);

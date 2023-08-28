@@ -6061,7 +6061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frame: {fileID: 6021699555620882621}
-  frameColor: {r: 0, g: 0, b: 0, a: 0}
+  frameColor: {r: 1, g: 1, b: 1, a: 0}
   frameNumber: 11
   frameIndex: 0
 --- !u!1 &799151081391396611

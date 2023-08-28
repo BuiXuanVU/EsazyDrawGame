@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SaveScene : MonoBehaviour
 {
-    private int level = 1;
     private void Reset()
     { //phuc hoi level 1
         //PlayerPrefs.SetInt(keyName, 0);
@@ -14,7 +13,7 @@ public class SaveScene : MonoBehaviour
     }
     public int GetLevel(string keyName)
     {
-        return PlayerPrefs.GetInt(keyName+"lv");
+        return PlayerPrefs.GetInt(keyName + "lv");
     }
     public int GetArtLevel(string keyName)
     {
@@ -22,8 +21,7 @@ public class SaveScene : MonoBehaviour
     }
     public void SaveLevel(string keyName)
     {
-        int level = GetLevel(keyName + "lv") + 1;
-        PlayerPrefs.SetInt(keyName + "lv", level); 
+        PlayerPrefs.SetInt(keyName+"lv", GetLevel(keyName) + 1); 
     }
     public void SaveArtLevel(string keyName,int artLv)
     {
