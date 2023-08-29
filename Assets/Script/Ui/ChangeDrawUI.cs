@@ -3,35 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeDrawUI : CongratsTextImageCtrl
+public class ChangeDrawUI : ComponentBehaviuor
 {
-    [SerializeField] private Transform buttonContinue;
     public bool isPainting;
     public bool isDone;
     int countAds = 0;
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        LoadButtonnContinue();
-    }
-    protected override void Start()
-    {
-        base.Start();
-        ScaleImage(buttonContinue,0.2f);
-    }
-    private void LoadButtonnContinue()
-    {
-        if(buttonContinue != null) { return; }
-        buttonContinue = transform.GetChild(2);
-    }    
     public void NextImage()
     {
+        PenCtrl.Instance.PenDraw.SetPickUp();
         countAds++;
         if(countAds % 3 ==1) 
         {
             AdsManager.Instance.ShowInterstitial();
         }
-        
         if (!isPainting)
         {
             if (AutoDraw.instance.FrameCountCompare())
@@ -59,7 +43,6 @@ public class ChangeDrawUI : CongratsTextImageCtrl
             AudioCtrl.Instance.ChangeFrameSound();
             UIManager.Instance.UICongratsCtrl.gameObject.SetActive(true);
         }
-        gameObject.SetActive(false);
     }
     public void FrameTransition()
     {

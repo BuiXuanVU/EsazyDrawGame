@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Art 1
   m_EditorClassIdentifier: 
   prefabLevel:
-  - {fileID: 8197290439456233306, guid: 2d8e3eb7c42572b4facc4309cfb06830, type: 3}
-  - {fileID: 7041041574136306783, guid: 4f493e1f8446c7f439144ff68ee39544, type: 3}
+  - {fileID: 6204223338013909833, guid: 2d8e3eb7c42572b4facc4309cfb06830, type: 3}
+  - {fileID: 1181269850133330036, guid: 4f493e1f8446c7f439144ff68ee39544, type: 3}
   - {fileID: 3637846205533231691, guid: 24de1b1dc00ed6d4aa0b77a0d89765b1, type: 3}
   - {fileID: 8511670804005254732, guid: d404e4a571c50e248a4cc3f000e39c9c, type: 3}
-  - {fileID: 7538632424131765682, guid: 66dae7f986ff5934e81999b4c4bbde39, type: 3}
+  - {fileID: 2611466526435073093, guid: 66dae7f986ff5934e81999b4c4bbde39, type: 3}

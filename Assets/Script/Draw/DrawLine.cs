@@ -23,7 +23,7 @@ public class DrawLine : ComponentBehaviuor
 
     private void Update()
     {
-        if (!AutoDraw.instance.isCompleteDraw)
+        if (!AutoDraw.instance.isCompleteDraw && ZoomCamera.Instance.IsCompleteZoom())
         {
             if (InputManager.Instance.GetTouch())
             {

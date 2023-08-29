@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+
 using UnityEngine;
 
 public class CompleteUIEffect : UIEffect
@@ -10,10 +8,15 @@ public class CompleteUIEffect : UIEffect
     [SerializeField] private Transform nextButtan;
     [SerializeField] private Transform restartButtan;
     [SerializeField] private Transform banner;
+    [SerializeField] private Transform glow;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadTranformEffect();
+    }
+    private void Update()
+    {
+        glow.Rotate(0, 0, 20 * Time.deltaTime);
     }
     private void LoadTranformEffect()
     {
@@ -27,6 +30,8 @@ public class CompleteUIEffect : UIEffect
         restartButtan = transform.GetChild(1);
         if (nextButtan != null) return;
         nextButtan = transform.GetChild(2);
+        if (glow != null) return;
+        glow = transform.GetChild(3);
     }
     protected override void Start()
     {

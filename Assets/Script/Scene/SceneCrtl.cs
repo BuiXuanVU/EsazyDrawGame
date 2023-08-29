@@ -24,7 +24,7 @@ public class SceneCrtl : ComponentBehaviuor
     protected override void Start()
     {
         base.Start();
-        level = LevelCtrl.Instance.level-1;
+        level = LevelCtrl.Instance.level;
         loadLevel();
     }
     private void loadLevel()
@@ -48,14 +48,14 @@ public class SceneCrtl : ComponentBehaviuor
     }
     public void NextLevel()
     {
-        AdsManager.Instance.ShowVideoReward((success =>
-        {
-            if (success)
-            {
-                ChangeLevel();
-            }
-        }));
-        
+        //AdsManager.Instance.ShowVideoReward((success =>
+        //{
+        //    if (success)
+        //    {
+                
+        //    }
+        //}));
+        ChangeLevel();
     }
     private void ChangeLevel()
     {

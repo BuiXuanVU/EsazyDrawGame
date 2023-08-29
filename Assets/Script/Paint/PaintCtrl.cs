@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class PaintCtrl : ComponentBehaviuor
 {
     [SerializeField] public List<Transform> paintPoint;
-    private float lastTime;
+    //private float lastTime;
     [SerializeField] private int i = 0;
     protected override void LoadComponents()
     {
@@ -50,7 +50,7 @@ public class PaintCtrl : ComponentBehaviuor
         else
         {
             AudioCtrl.Instance.ClearSound();
-            UIManager.Instance.ActiveImageDialog();
+            UIManager.Instance.ChangeDrawUI.NextImage();
             PenCtrl.Instance.PenDraw.HidePen();
         }
     }

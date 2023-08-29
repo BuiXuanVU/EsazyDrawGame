@@ -6,7 +6,7 @@ public class FrameCtrl : ComponentBehaviuor
 {
     [SerializeField] public GameObject frame;
     private GameObject subframe;
-    [SerializeField] public Color frameColor;
+    [SerializeField] public Color frameColor = new Color(255,255,255,0);
     [SerializeField] private int frameNumber;
     [SerializeField] private int frameIndex = 0;
     private bool isActive;
@@ -21,6 +21,7 @@ public class FrameCtrl : ComponentBehaviuor
     {
         base.Start();
         LoadTemplete();
+        ZoomCamera.Instance.GetScaleZoom(GetWidth(frameIndex));
         ZoomCamera.Instance.Zoom(frame.transform);
     }
     private void Update()

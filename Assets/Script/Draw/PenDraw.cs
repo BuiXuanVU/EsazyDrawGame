@@ -46,7 +46,6 @@ public class PenDraw : ComponentBehaviuor
         isStart = true;
         isHide = false;
     }
-
     private void MoveToStartPos()
     {
         if (Vector2.Distance(transform.position, startPos.position) < 0.01)

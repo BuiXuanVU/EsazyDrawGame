@@ -7,8 +7,6 @@ public class SaveScene : MonoBehaviour
 {
     private void Reset()
     { //phuc hoi level 1
-        //PlayerPrefs.SetInt(keyName, 0);
-        //PlayerPrefs.SetInt(ArtLevel, 0);
         PlayerPrefs.DeleteAll();
     }
     public int GetLevel(string keyName)
