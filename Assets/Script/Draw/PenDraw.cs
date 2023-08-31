@@ -61,6 +61,7 @@ public class PenDraw : ComponentBehaviuor
         speed = 10;
         transform.position = startPos.position;
         isStart = false;
+        speed = AutoDraw.instance.GetSpeed();
     }
     public void GetPointToMove(Transform nextPos,float dist)
     {
