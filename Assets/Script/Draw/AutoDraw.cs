@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,12 +19,12 @@ public class AutoDraw : ComponentBehaviuor
     {
         base.Start();
         GetPointDraw();
+        SetStartPosDraw();
     }
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadDrawNumber();
-    }
+        LoadDrawNumber();    }
     private void GetPointDraw()
     {
         Point = transform.GetChild(paintingNumber).GetComponent<DrawPointCtrl>();
@@ -58,4 +59,24 @@ public class AutoDraw : ComponentBehaviuor
             return true;
         return false;
     }
+    private void SetStartPosDraw()
+    {
+        Point.startPoint.position = Point.points[0].position;
+        Point.endPoint.position = Point.points[Point.points.Count-1].position;
+    }
+    public void StartDraw()
+    {
+        Point.startPoint.gameObject.SetActive(false);
+        Point.endPoint.gameObject.SetActive(true);
+    }
+    public Transform GetPoint(int count)
+    {
+        return Point.points[count];
+    }    
+    public bool IsListHasBeenApproved(int count)
+    {
+        if(count+1 == Point.points.Count)
+            return true;
+        return false;
+    }    
 }

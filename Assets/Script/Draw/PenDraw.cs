@@ -16,7 +16,6 @@ public class PenDraw : ComponentBehaviuor
     private bool isPickup = false;
     private bool isStart;
     private bool isHide;
-    private Vector2 velocity;
     private float X;
     private void Update()
     {
@@ -63,10 +62,10 @@ public class PenDraw : ComponentBehaviuor
         transform.position = startPos.position;
         isStart = false;
     }
-    public void GetPoint(Transform nextPos,float x)
+    public void GetPointToMove(Transform nextPos,float dist)
     {
         this.nextPos = nextPos;
-        X = x;
+        X = dist / 3 * 2;
         isMoving = true;
     }
     public void GetMaskPos(Transform maskPos)
@@ -79,10 +78,16 @@ public class PenDraw : ComponentBehaviuor
         if (isMoving)
         {
             AudioCtrl.Instance.DrawSound();
-            transform.position = Vector2.SmoothDamp(transform.position, nextPos.position, ref velocity, X*0.2f, speed);
+            transform.position = Vector2.MoveTowards(transform.position, nextPos.position, 10 * Time.deltaTime);
             isPickup = true;
         }
     }
+    public bool IsPenArrived()
+    {
+        if ((Vector2.Distance(transform.position, nextPos.position) < X))
+            return true;
+        return false;
+    }    
     private void MoveToMask()
     {
         if (isPainting)

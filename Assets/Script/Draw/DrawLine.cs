@@ -7,7 +7,6 @@ public class DrawLine : ComponentBehaviuor
     [SerializeField] private LineRenderer line;
     [SerializeField] public bool isDraw = false;
     [SerializeField] private bool isStopDraw;
-    private float dist ;
     public int number = 0;
     public Transform origin;
     public Transform destination;
@@ -52,18 +51,17 @@ public class DrawLine : ComponentBehaviuor
     private void GetPoint()
     {
         if(number == 0)
-        {   origin = AutoDraw.instance.Point.startPoint;
-            destination = AutoDraw.instance.Point.points[number];
-            AutoDraw.instance.Point.startPoint.gameObject.SetActive(false);
-            AutoDraw.instance.Point.endPoint.gameObject.SetActive(true);
-            line.SetPosition(0, origin.position);
+        {
+            origin = AutoDraw.instance.GetPoint(number);
+            destination = AutoDraw.instance.GetPoint(number);
+            AutoDraw.instance.StartDraw();
         }
         else
         {
-            origin = AutoDraw.instance.Point.points[number];
-            if (number+1 < AutoDraw.instance.Point.points.Count)
+            origin = AutoDraw.instance.GetPoint(number);
+            if (!AutoDraw.instance.IsListHasBeenApproved(number))
             {
-                destination = AutoDraw.instance.Point.points[number + 1];
+                destination = AutoDraw.instance.GetPoint(number + 1);
             }
             else
             {
@@ -71,14 +69,9 @@ public class DrawLine : ComponentBehaviuor
                 return;
             }
         }
-        if(line.positionCount == number+1)
-        {
-            line.positionCount++;
-        }
-        line.SetPosition(number, origin.position);
-        line.SetPosition(number+1, origin.position);
-        dist = Vector2.Distance(origin.position, destination.position);
-        PenCtrl.Instance.PenDraw.GetPoint(destination, dist);
+        float dist = Vector2.Distance(origin.position, destination.position);
+        if (dist == 0) dist = 0.05f;
+        PenCtrl.Instance.PenDraw.GetPointToMove(destination,dist);
         isDraw = true;
     }  
     private void EndDraw()
@@ -91,6 +84,12 @@ public class DrawLine : ComponentBehaviuor
 
     private void Draw()
     {
+        if (!PenCtrl.Instance.PenDraw.IsPenArrived()) return;
+        if (line.positionCount == number + 1)
+        {
+            line.positionCount++;
+        }
+        line.SetPosition(number, origin.position);
         line.SetPosition(number + 1, destination.position);
         isDraw = false;
         number++;
