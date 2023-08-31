@@ -5,16 +5,11 @@ using UnityEngine;
 
 public class NoticeColoringArea : MonoBehaviour
 {
-    public static NoticeColoringArea instance;
     [SerializeField] private SpriteRenderer markSprite;
     private bool isUp = false;
     private bool isDirectionUp = false;
     private float a;
     private float coloringSpeed = 1f;
-    private void Awake()
-    {
-        instance = this;
-    }
     private void Update()
     {
         if(isUp)

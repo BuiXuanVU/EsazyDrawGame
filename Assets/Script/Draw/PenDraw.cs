@@ -126,7 +126,7 @@ public class PenDraw : ComponentBehaviuor
             isMoving = false;
             isPainting = false;
             isComletePaint = true;
-            Vector2 pickUpHide = new Vector2(transform.position.x + 8f, transform.position.y);
+            Vector2 pickUpHide = new Vector2(transform.position.x + 10f, transform.position.y);
             transform.position = pickUpHide;
             isHide = true;
         }

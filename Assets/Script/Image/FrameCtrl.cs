@@ -21,7 +21,7 @@ public class FrameCtrl : ComponentBehaviuor
     {
         base.Start();
         LoadTemplete();
-        ZoomCamera.Instance.GetScaleZoom(GetWidth(frameIndex));
+        ZoomCamera.Instance.GetScaleZoom(GetWidth(frameIndex+1));
         ZoomCamera.Instance.Zoom(frame.transform);
     }
     private void Update()

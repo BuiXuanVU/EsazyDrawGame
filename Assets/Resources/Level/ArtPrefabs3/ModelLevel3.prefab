@@ -15301,7 +15301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frame: {fileID: 1516855897777080353}
-  frameColor: {r: 1, g: 1, b: 1, a: 0}
+  frameColor: {r: 255, g: 255, b: 255, a: 0}
   frameNumber: 5
   frameIndex: 0
 --- !u!1 &5102217103864710699

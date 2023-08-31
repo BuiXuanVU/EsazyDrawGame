@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,7 +12,7 @@ public class InputManager : MonoBehaviour
     }
     public bool GetTouch()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             if (EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject != null)
                 return false;
@@ -23,8 +21,12 @@ public class InputManager : MonoBehaviour
         } 
         return false;
     }
-    public bool GetRelease()
+    public bool GetMouseDown()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            return true;
+        }
         return false;
     }
 }

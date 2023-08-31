@@ -6,6 +6,7 @@ public class DrawLine : ComponentBehaviuor
 {
     [SerializeField] private LineRenderer line;
     [SerializeField] public bool isDraw = false;
+    [SerializeField] private bool isStopDraw;
     private float dist ;
     public int number = 0;
     public Transform origin;
@@ -23,6 +24,17 @@ public class DrawLine : ComponentBehaviuor
 
     private void Update()
     {
+        if(InputManager.Instance.GetMouseDown())
+        {
+            if(isStopDraw)
+            {
+                isStopDraw = false;
+            }
+        }
+        if (isStopDraw)
+        {
+            return;
+        }
         if (!AutoDraw.instance.isCompleteDraw && ZoomCamera.Instance.IsCompleteZoom())
         {
             if (InputManager.Instance.GetTouch())
@@ -74,6 +86,7 @@ public class DrawLine : ComponentBehaviuor
         AudioCtrl.Instance.ClearSound();
         destination = AutoDraw.instance.Point.endPoint;
         AutoDraw.instance.HideDrawPoint();
+        isStopDraw = true;
     }
 
     private void Draw()

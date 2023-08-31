@@ -14,7 +14,7 @@ public class ChangeDrawUI : ComponentBehaviuor
         countAds++;
         if(countAds % 3 ==1) 
         {
-            AdsManager.Instance.ShowInterstitial();
+            //AdsManager.Instance.ShowInterstitial();
         }
         if (!isPainting)
         {

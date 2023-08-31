@@ -20417,7 +20417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frame: {fileID: 8305350694945063594}
-  frameColor: {r: 0, g: 0, b: 0, a: 0}
+  frameColor: {r: 255, g: 255, b: 255, a: 0}
   frameNumber: 6
   frameIndex: 0
 --- !u!1 &4933546603985942694
