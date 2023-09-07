@@ -84,7 +84,7 @@ public class DrawLine : ComponentBehaviuor
 
     private void Draw()
     {
-        if (!PenCtrl.Instance.PenDraw.IsPenArrived()) return;
+        //if (!PenCtrl.Instance.PenDraw.IsPenArrived()) return;
         if (line.positionCount == number + 1)
         {
             line.positionCount++;

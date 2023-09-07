@@ -48,13 +48,13 @@ public class SceneCrtl : ComponentBehaviuor
     }
     public void NextLevel()
     {
-        //AdsManager.Instance.ShowVideoReward((success =>
-        //{
-        //    if (success)
-        //    {
+        AdsManager.Instance.ShowVideoReward((success =>
+        {
+            if (success)
+            {
                 
-        //    }
-        //}));
+            }
+        }));
         ChangeLevel();
     }
     private void ChangeLevel()

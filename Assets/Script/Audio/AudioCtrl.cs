@@ -11,6 +11,7 @@ public class AudioCtrl : ComponentBehaviuor
     [SerializeField] private List<AudioClip> audios;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource drawSource;
+    public bool isMute = true;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -19,7 +20,13 @@ public class AudioCtrl : ComponentBehaviuor
     protected override void Awake()
     {
         base.Awake();
-        instance = this;
+        if (instance != null && instance != this)
+            Destroy(this.gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
     protected override void Start()
     {
@@ -69,17 +76,19 @@ public class AudioCtrl : ComponentBehaviuor
         audioSource.clip = audios[audioCount];
         audioSource.Play();
     }
-    public void MuteAudio(bool isMute)
+    public void MuteAudio()
     {
         if (isMute)
         {
             audioSource.mute = true;
             drawSource.mute = true;
+            isMute = false;
         }
         else
         {
             audioSource.mute = false;
             drawSource.mute = false;
+            isMute = false;
         }
     }    
 }

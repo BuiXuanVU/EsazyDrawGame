@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class PaintCtrl : ComponentBehaviuor
 {
     [SerializeField] public List<Transform> paintPoint;
-    //private float lastTime;
     [SerializeField] private int i = 0;
     protected override void LoadComponents()
     {
@@ -38,11 +37,12 @@ public class PaintCtrl : ComponentBehaviuor
     {
         if (!PenCtrl.Instance.PenDraw.GetCompletePaint())
         {
+            
             return;
         }    
         if(i<paintPoint.Count)
         {
-            if(i+1< paintPoint.Count)
+            if (i+2< paintPoint.Count)
                 PenCtrl.Instance.PenDraw.GetMaskPos(paintPoint[i+1]);
             paintPoint[i].gameObject.SetActive(true);
             i++;

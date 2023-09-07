@@ -7,15 +7,15 @@ public class ChangeDrawUI : ComponentBehaviuor
 {
     public bool isPainting;
     public bool isDone;
-    int countAds = 0;
     public void NextImage()
     {
         PenCtrl.Instance.PenDraw.SetPickUp();
-        countAds++;
-        if(countAds % 3 ==1) 
+        if(ADSTimer.Instance.StartADS())
         {
-            //AdsManager.Instance.ShowInterstitial();
+            AdsManager.Instance.ShowInterstitial();
+            ADSTimer.Instance.ReturnTimer();
         }
+            
         if (!isPainting)
         {
             if (AutoDraw.instance.FrameCountCompare())

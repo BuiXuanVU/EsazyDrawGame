@@ -14,10 +14,12 @@ public class ZoomCamera : ComponentBehaviuor
 
     [SerializeField] private Camera _camera;
     private int speed = 6;
-    public bool isZoom;
-    public bool isReturn;
-    public bool isMove;
-    public Vector3 frameTransform;
+    private int ZoomScale;
+    private int CurrentZoomScale;
+    private bool isZoom;
+    private bool isReturn;
+    private bool isMove;
+    private Vector3 frameTransform;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -32,6 +34,11 @@ public class ZoomCamera : ComponentBehaviuor
     {
         base.Awake();
         instance = this;
+    }
+    protected override void Start()
+    {
+        base.Start();
+        CurrentZoomScale = (int)_camera.orthographicSize;
     }
     private void Update()
     {
@@ -48,7 +55,7 @@ public class ZoomCamera : ComponentBehaviuor
         {
             if (isReturn)
             {
-                if (_camera.orthographicSize < 12)
+                if (_camera.orthographicSize < 9)
                     _camera.orthographicSize += 0.1f;
                 else
                 {
@@ -58,23 +65,46 @@ public class ZoomCamera : ComponentBehaviuor
             }
             else
             {
-                if (_camera.orthographicSize > 6)
-                {
-                    _camera.orthographicSize -= 0.1f;
-                }
-                else
-                {
-                    isZoom = false;
-                }
+                DoScaleCamera();
+            }
+        }
+    }
+    private void DoScaleCamera()
+    {
+        if (ZoomScale < CurrentZoomScale)
+        {
+            if (_camera.orthographicSize > ZoomScale)
+            {
+                _camera.orthographicSize -= 0.1f;
+            }
+            else
+            {
+                isZoom = false;
+                CurrentZoomScale = ZoomScale;
+            }
+        }
+        else
+        {
+            if (_camera.orthographicSize < ZoomScale)
+            {
+                _camera.orthographicSize += 0.1f;
+            }
+            else
+            {
+                isZoom = false;
+                CurrentZoomScale = ZoomScale;
             }
         }
     }
     public void GetScaleZoom(float width)
     {
-        if (width > 5)
+        if (width > 7)
             isReturn = true;
         else
+        {
             isReturn = false;
+            ZoomScale = (int)width + 2;
+        }
     }
     public void Zoom(Transform framePosition)
     {

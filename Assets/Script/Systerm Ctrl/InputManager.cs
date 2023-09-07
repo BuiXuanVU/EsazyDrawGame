@@ -5,7 +5,6 @@ public class InputManager : MonoBehaviour
 {
     private static InputManager instance;
     public static InputManager Instance { get { return instance; } }
-    public bool isClick;
     private void Awake()
     {
         instance = this;

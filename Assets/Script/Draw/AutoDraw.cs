@@ -81,9 +81,11 @@ public class AutoDraw : ComponentBehaviuor
     }    
     public int GetSpeed()
     {
+        if (Point.points.Count > 100)
+            return 30;
         if (Point.points.Count > 50)
-            return 15;
+            return 20;
         else
-            return 7;
+            return 10;
     }    
 }

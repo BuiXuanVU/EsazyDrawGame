@@ -69,11 +69,6 @@ public class UIManager : ComponentBehaviuor
         if (uICongratsCtrl != null) return;
         uICongratsCtrl = transform.GetComponentInChildren<UICongratsCtrl>();
     }
-    //public void ActiveImageDialog()
-    //{
-        //PenCtrl.Instance.PenDraw.SetPickUp();
-        //changeDrawUI.gameObject.SetActive(true);
-    //}
     public void StartPainting()
     {
         paintBucketCtrl.ActiveBuckets();

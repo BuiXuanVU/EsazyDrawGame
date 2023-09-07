@@ -13,7 +13,7 @@ public class BasicUIEffect : UIEffect
     [SerializeField] private Sprite musicON;
     [SerializeField] private Sprite musicOFF;
     private bool isTap;
-    private bool isMute = true;
+    
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -59,17 +59,15 @@ public class BasicUIEffect : UIEffect
     }    
     public void ButtonMuteClick()
     {
-        if(isMute)
+        if(AudioCtrl.Instance.isMute)
         {
-            AudioCtrl.Instance.MuteAudio(isMute);
+            AudioCtrl.Instance.MuteAudio();
             music.image.sprite = musicOFF;
-            isMute = false;
         }
         else
         {
-            AudioCtrl.Instance.MuteAudio(isMute);
+            AudioCtrl.Instance.MuteAudio();
             music.image.sprite = musicON;
-            isMute = true;
         }
     }    
 }
