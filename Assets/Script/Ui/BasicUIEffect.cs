@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BasicUIEffect : UIEffect
@@ -9,9 +10,6 @@ public class BasicUIEffect : UIEffect
     [SerializeField] private TextMeshProUGUI tap;
     [SerializeField] private TextMeshProUGUI level;
     [SerializeField] private Image template;
-    [SerializeField] private Button music;
-    [SerializeField] private Sprite musicON;
-    [SerializeField] private Sprite musicOFF;
     private bool isTap;
     
     protected override void LoadComponents()
@@ -44,6 +42,7 @@ public class BasicUIEffect : UIEffect
     public void GetCurrentLevel(int currenlevel)
     {
         level.text = "Level " + currenlevel.ToString();
+        UIManager.Instance.CompleteUIEffect.GetCompleteLevel(currenlevel);
     }
     private void Update()
     {
@@ -56,18 +55,9 @@ public class BasicUIEffect : UIEffect
     public void GetTemplate(Sprite templeteSprite)
     {
         template.sprite = templeteSprite;
-    }    
-    public void ButtonMuteClick()
+    }
+    public void OpenSetting()
     {
-        if(AudioCtrl.Instance.isMute)
-        {
-            AudioCtrl.Instance.MuteAudio();
-            music.image.sprite = musicOFF;
-        }
-        else
-        {
-            AudioCtrl.Instance.MuteAudio();
-            music.image.sprite = musicON;
-        }
-    }    
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
+    }
 }

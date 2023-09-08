@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public abstract class CongratsTextImageCtrl : UIEffect
 {
-    [SerializeField] protected Image textSprite;
+    [SerializeField] protected SpriteRenderer textSprite;
     protected override void OnEnable()
     {
         base.OnEnable();

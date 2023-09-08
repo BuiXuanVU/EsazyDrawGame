@@ -12,6 +12,7 @@ public class AudioCtrl : ComponentBehaviuor
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource drawSource;
     public bool isMute = true;
+    public bool isSoundMute = true;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -81,14 +82,25 @@ public class AudioCtrl : ComponentBehaviuor
         if (isMute)
         {
             audioSource.mute = true;
-            drawSource.mute = true;
             isMute = false;
         }
         else
         {
             audioSource.mute = false;
-            drawSource.mute = false;
-            isMute = false;
+            isMute = true;
         }
-    }    
+    }
+    public void MuteDrawAudio()
+    {
+        if (isSoundMute)
+        {
+            drawSource.mute = true;
+            isSoundMute = false;
+        }
+        else
+        {
+            drawSource.mute = false;
+            isSoundMute = true;
+        }
+    }
 }

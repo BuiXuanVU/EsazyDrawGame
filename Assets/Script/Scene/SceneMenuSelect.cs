@@ -46,7 +46,7 @@ public class SceneMenuSelect : UIEffect
     public void SelectLevel()
     {
         LevelCtrl.Instance.GetLevel(level);
-        SceneManager.LoadScene("Art " + 1);
+        SceneManager.LoadScene(2);
     }
     public void AfterArt()
     {
@@ -76,5 +76,9 @@ public class SceneMenuSelect : UIEffect
         else
             level--;
         ScaleEffect(Arts[level]);
+    }
+    public void OpenSetting()
+    {
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 }

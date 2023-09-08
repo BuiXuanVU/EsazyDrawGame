@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UICongratsCtrl : CongratsTextImageCtrl
 {
-    [SerializeField] protected Image icon;
+    [SerializeField] protected SpriteRenderer icon;
     [SerializeField] protected List<GameObject> partical;
     private int temp;
     protected override void LoadComponents()
@@ -25,12 +25,12 @@ public class UICongratsCtrl : CongratsTextImageCtrl
     private void LoadIcon()
     {
         if (icon != null) return;
-        icon = transform.GetChild(3).GetComponent<Image>();
+        icon = transform.GetChild(3).GetComponent<SpriteRenderer>();
     }
     private void LoadTextImage()
     {
         if (textSprite != null) return;
-        textSprite = transform.GetChild(4).GetComponent<Image>();
+        textSprite = transform.GetChild(4).GetComponent<SpriteRenderer>();
     }
     
     protected override void OnEnable()

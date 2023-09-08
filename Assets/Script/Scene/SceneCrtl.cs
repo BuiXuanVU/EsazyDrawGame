@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneCrtl : ComponentBehaviuor
@@ -9,12 +10,29 @@ public class SceneCrtl : ComponentBehaviuor
     [SerializeField] private SaveScene saveScene;
     public SaveScene SaveScene { get { return saveScene; } }
     [SerializeField] private List<LevelScriptTable> levelSpawner;
+    [SerializeField] private GameObject UI;
     int level;
     int count;
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        LoadAllLevel();
         LoadSaveScene();
+        LoadUI();
+    }
+    private void LoadUI()
+    {
+        if (UI != null) return;
+        UI = Resources.Load("Prefabs/UI") as GameObject;
+    }
+    private void LoadAllLevel()
+    {
+        if (levelSpawner.Count > 0) return;
+        var scripTable = Resources.LoadAll("Level/Art");
+        for(int i = 0; i < scripTable.Length; i++)
+        {
+            levelSpawner.Add(scripTable[i] as LevelScriptTable);
+        }
     }
     private void LoadSaveScene()
     {
@@ -24,6 +42,7 @@ public class SceneCrtl : ComponentBehaviuor
     protected override void Start()
     {
         base.Start();
+        //Instantiate(UI);
         level = LevelCtrl.Instance.level;
         loadLevel();
     }
@@ -36,15 +55,7 @@ public class SceneCrtl : ComponentBehaviuor
     public void Replay()
     {
         AudioCtrl.Instance.ClickButtonSound();
-        SceneManager.LoadScene(CurrneScene());
-    }
-    private int CurrneScene()
-    {
-        return SceneManager.GetActiveScene().buildIndex;
-    }
-    public void LoadArtGalley()
-    {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     public void NextLevel()
     {
