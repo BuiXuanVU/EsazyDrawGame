@@ -42,7 +42,6 @@ public class SceneCrtl : ComponentBehaviuor
     protected override void Start()
     {
         base.Start();
-        //Instantiate(UI);
         level = LevelCtrl.Instance.level;
         loadLevel();
     }

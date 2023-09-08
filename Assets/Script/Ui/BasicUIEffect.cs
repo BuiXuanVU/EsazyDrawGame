@@ -58,6 +58,7 @@ public class BasicUIEffect : UIEffect
     }
     public void OpenSetting()
     {
+        Time.timeScale = 0;
         SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 }

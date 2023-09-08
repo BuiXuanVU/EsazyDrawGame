@@ -69,10 +69,8 @@ public class DrawLine : ComponentBehaviuor
                 return;
             }
         }
-        float dist = Vector2.Distance(origin.position, destination.position);
-        if (dist == 0) dist = 0.05f;
-        PenCtrl.Instance.PenDraw.GetPointToMove(destination,dist);
         isDraw = true;
+        PenCtrl.Instance.PenDraw.GetPointToMove(destination);
     }  
     private void EndDraw()
     {
@@ -84,7 +82,6 @@ public class DrawLine : ComponentBehaviuor
 
     private void Draw()
     {
-        //if (!PenCtrl.Instance.PenDraw.IsPenArrived()) return;
         if (line.positionCount == number + 1)
         {
             line.positionCount++;

@@ -16,7 +16,6 @@ public class PenDraw : ComponentBehaviuor
     private bool isPickup;
     private bool isStart;
     private bool isHide;
-    private float X;
     private void Update()
     {
         if (isStart == true)
@@ -63,10 +62,9 @@ public class PenDraw : ComponentBehaviuor
         isStart = false;
         speed = AutoDraw.instance.GetSpeed();
     }
-    public void GetPointToMove(Transform nextPos,float dist)
+    public void GetPointToMove(Transform nextPos)
     {
         this.nextPos = nextPos;
-        X = 1;//dist / 5 * 2;
         isMoving = true;
     }
     public void GetMaskPos(Transform maskPos)
@@ -96,12 +94,6 @@ public class PenDraw : ComponentBehaviuor
             isPickup = true;
         }
     }
-    public bool IsPenArrived()
-    {
-        if ((Vector2.Distance(transform.position, nextPos.position) < X))
-            return true;
-        return false;
-    }    
     private void MoveToMask()
     {
         if (isPainting)
